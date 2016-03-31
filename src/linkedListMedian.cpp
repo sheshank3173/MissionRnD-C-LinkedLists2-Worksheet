@@ -20,5 +20,33 @@ struct node {
 };
 
 int linkedListMedian(struct node *head) {
-	return -1;
+	if (head == NULL)
+		return - 1;
+	int len = 0, sum = 0, count = 0;
+	struct node *temp;
+	temp = head;
+	while (temp != NULL)
+	{
+		len++;
+		sum = sum + len;
+		temp = temp->next;
+	}
+	int mid = sum / len;
+	temp = head;
+	while (temp != NULL)
+	{
+		count++;
+		if (count == mid)
+		{
+			if (len % 2 != 0)
+			{
+				return temp->num;
+			}
+			else if (len % 2 == 0)
+			{
+				return (temp->num + (temp->next)->num) / 2;
+			}
+		}
+		temp = temp->next;
+	}
 }
